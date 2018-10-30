@@ -1,37 +1,49 @@
 apply from: '../dependencies/globalDependencies.gradle'
 apply from: 'dependencies/dependencies.gradle'
+apply from: '../app/buildConfig/buildVersion.gradle'
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 28
+	def globalConfiguration = project.extensions.getByName("ext")
+	buildToolsVersion globalConfiguration["androidBuildToolsVersion"]
+	compileSdkVersion globalConfiguration["androidCompileSdkVersion"]
 
+	defaultConfig {
+		minSdkVersion globalConfiguration["androidMinSdkVersion"]
+		targetSdkVersion globalConfiguration["androidTargetSdkVersion"]
+		versionCode versionBuild
+		versionName "${versionMajor}.${versionMinor}.${versionPatch}"
 
+		testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
-    defaultConfig {
-        minSdkVersion 19
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+	}
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
-    }
-
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-    }
+	buildTypes {
+		debug {
+			debuggable true
+			minifyEnabled false
+			proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+		}
+		staging {
+			debuggable true
+			minifyEnabled true
+			proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+		}
+		release {
+			debuggable false
+			minifyEnabled true
+			proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+		}
+	}
 
 }
 
 dependencies {
 	api project(':domain')
 
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+	implementation fileTree(dir: 'libs', include: ['*.jar'])
 
 	implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlinVersion"
 }
