@@ -61,7 +61,7 @@ val Any.TAG: String
 	get() = if (this is HasTag) {
 		this.TAG
 	} else {
-		"${this.javaClass.simpleName} [BEERS]"
+		"${this.javaClass.simpleName} [NINETYNINECHALLENGE]"
 	}
 
 open class KotlinLoggerForest() : LoggerTree {
