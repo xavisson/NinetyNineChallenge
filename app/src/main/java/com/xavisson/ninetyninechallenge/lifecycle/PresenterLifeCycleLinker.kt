@@ -1,5 +1,7 @@
 package com.xavisson.ninetyninechallenge.lifecycle
 
+import com.xavisson.ninetyninechallenge.base.BasePresenter
+import com.xavisson.ninetyninechallenge.base.BaseView
 import java.lang.reflect.Modifier
 
 open class PresenterLifeCycleLinker {
