@@ -1,7 +1,8 @@
-package com.xavisson.ninetyninechallenge
+package com.xavisson.ninetyninechallenge.presentation
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import com.xavisson.ninetyninechallenge.R
 
 class MainActivity : AppCompatActivity() {
 
