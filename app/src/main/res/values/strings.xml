@@ -1,3 +1,4 @@
 <resources>
 	<string name="app_name">Ninety Nine Challenge</string>
+    <string name="companylist_header">Portfolio</string>
 </resources>
