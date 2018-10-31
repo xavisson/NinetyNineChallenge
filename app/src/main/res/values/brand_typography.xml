@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Heading1" parent="TextAppearance.AppCompat.Title">
+    <style name="Heading1" parent="android:TextAppearance">
         <item name="android:textSize">28dp</item>
         <item name="android:height">32dp</item>
-        <item name="android:textColor">@color/dark_blue</item>
+        <item name="android:textColor">@color/dark_grey</item>
         <item name="android:textStyle">bold</item>
     </style>
 
     <style name="Heading1_inverted" parent="Heading1">
-        <item name="android:textColor">@color/white</item>
+        <item name="android:textColor">@color/green</item>
     </style>
 
     <style name="Heading2" parent="android:TextAppearance">
         <item name="android:textSize">18dp</item>
         <item name="android:height">24dp</item>
-        <item name="android:textColor">@color/dark_blue</item>
+        <item name="android:textColor">@color/dark_grey</item>
         <item name="android:textStyle">bold</item>
     </style>
 
@@ -26,13 +26,13 @@
     <style name="Title1" parent="android:TextAppearance">
         <item name="android:textSize">18dp</item>
         <item name="android:height">24dp</item>
-        <item name="android:textColor">@color/dark_blue</item>
+        <item name="android:textColor">@color/dark_grey</item>
     </style>
 
     <style name="Title2" parent="android:TextAppearance">
         <item name="android:textSize">16dp</item>
         <item name="android:height">24dp</item>
-        <item name="android:textColor">@color/dark_blue</item>
+        <item name="android:textColor">@color/dark_grey</item>
     </style>
 
     <style name="Body1" parent="android:TextAppearance">
