@@ -11,8 +11,8 @@ class CompanyListPresenter : BasePresenter<CompanyListView>() {
 
     private val items = (1..10).map { CompanyItemUI(
             id = it,
-            name = "Item $it",
-            ric = "ric$it/",
+            name = "company name $it",
+            ric = "ric $it/",
             sharePrice = it.toDouble()) }
 
     override fun onCreate() {
