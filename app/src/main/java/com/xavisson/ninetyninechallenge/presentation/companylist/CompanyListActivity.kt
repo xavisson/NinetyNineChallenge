@@ -40,7 +40,7 @@ class CompanyListActivity : BaseActivity(), CompanyListView {
         companyList.adapter = adapter
     }
 
-    override fun fillCompanyData() {
-        adapter.items = presenter.generate()
+    override fun showCompanyData(companies: List<CompanyUI>) {
+        adapter.items = companies
     }
 }

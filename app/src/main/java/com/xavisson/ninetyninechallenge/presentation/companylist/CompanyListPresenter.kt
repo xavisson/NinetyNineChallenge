@@ -1,30 +1,22 @@
 package com.xavisson.ninetyninechallenge.presentation.companylist
 
-import android.os.Handler
 import com.xavisson.ninetyninechallenge.base.BasePresenter
-import java.util.*
+import com.xavisson.ninetyninechallenge.domain.company.SubscribeToCompanyListUpdatesUseCase
+import io.reactivex.rxkotlin.subscribeBy
 
-class CompanyListPresenter : BasePresenter<CompanyListView>() {
-
-    val handler = Handler()
-    val runnable = { getView()?.fillCompanyData(); scheduleReload() }
-
-    private val items = (1..10).map { CompanyItemUI(
-            id = it,
-            name = "company name $it",
-            ric = "ric $it/",
-            sharePrice = it.toDouble()) }
+class CompanyListPresenter(
+        private val subscribeToCompanyListUpdatesUseCase: SubscribeToCompanyListUpdatesUseCase
+) : BasePresenter<CompanyListView>() {
 
     override fun onCreate() {
         super.onCreate()
-        runnable()
-    }
-    fun generate(): List<CompanyItemUI> {
-        val rand = Random(System.currentTimeMillis())
-        return items.filter { rand.nextBoolean() }
+        getCompanies()
     }
 
-    private fun scheduleReload() {
-        handler.postDelayed(runnable, 4000)
+    fun getCompanies() {
+        subscribeToCompanyListUpdatesUseCase.execute()
+                .subscribeBy(
+                        onNext = { getView()?.showCompanyData(it.toUi()) }
+                )
     }
 }

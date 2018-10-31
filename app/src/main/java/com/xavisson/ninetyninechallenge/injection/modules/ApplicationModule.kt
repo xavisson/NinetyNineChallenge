@@ -6,7 +6,9 @@ import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
 
-@Module(includes = arrayOf(ExecutorsModule::class))
+@Module(includes = arrayOf(
+        ExecutorsModule::class,
+        CompanyModule::class))
 class ApplicationModule(private val application: Application) {
 
     @Provides

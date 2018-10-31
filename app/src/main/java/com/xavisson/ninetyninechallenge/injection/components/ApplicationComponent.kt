@@ -1,6 +1,7 @@
 package com.xavisson.ninetyninechallenge.injection.components
 
 import com.xavisson.ninetyninechallenge.NinetyNineChallengeApplication
+import com.xavisson.ninetyninechallenge.domain.company.CompanyResource
 import com.xavisson.ninetyninechallenge.domain.executor.PostExecutionThread
 import com.xavisson.ninetyninechallenge.domain.executor.ThreadExecutor
 import com.xavisson.ninetyninechallenge.domain.executor.ThreadScheduler
@@ -20,4 +21,6 @@ interface ApplicationComponent {
     fun threadExecutor(): ThreadExecutor
 
     fun postExecutionThread(): PostExecutionThread
+
+    fun companyResource(): CompanyResource
 }
