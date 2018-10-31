@@ -12,10 +12,13 @@ abstract class BaseActivity : AppCompatActivity(), BaseView {
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
+		initInjector()
 		setContentView(layoutRes)
 		setupViews()
 		presenterLifeCycleLinker.onCreate(this)
 	}
+
+	abstract fun initInjector()
 
 	override fun onResume() {
 		super.onResume()
@@ -33,6 +36,7 @@ abstract class BaseActivity : AppCompatActivity(), BaseView {
 	}
 
 	open fun setupViews() {}
+
 	override fun onLowMemory() {
 		presenterLifeCycleLinker.onLowMemory()
 		super.onLowMemory()
