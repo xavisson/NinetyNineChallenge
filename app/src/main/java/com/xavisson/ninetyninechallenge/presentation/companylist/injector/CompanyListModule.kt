@@ -1,6 +1,10 @@
 package com.xavisson.ninetyninechallenge.presentation.companylist.injector
 
 import android.app.Activity
+import com.xavisson.ninetyninechallenge.domain.company.CompanyResource
+import com.xavisson.ninetyninechallenge.domain.company.SubscribeToCompanyListUpdates
+import com.xavisson.ninetyninechallenge.domain.company.SubscribeToCompanyListUpdatesUseCase
+import com.xavisson.ninetyninechallenge.domain.executor.ThreadScheduler
 import com.xavisson.ninetyninechallenge.injection.PerActivity
 import com.xavisson.ninetyninechallenge.injection.components.ActivityComponent
 import com.xavisson.ninetyninechallenge.injection.components.ApplicationComponent
@@ -15,9 +19,25 @@ import dagger.Provides
 class CompanyListModule(activity: Activity) : ActivityModule {
 
     @Provides
-    fun provideCompanyListPresenter(): CompanyListPresenter {
-        return CompanyListPresenter()
+    fun provideCompanyListPresenter(
+            subscribeToCompanyListUpdatesUseCase: SubscribeToCompanyListUpdatesUseCase
+    ): CompanyListPresenter {
+        return CompanyListPresenter(
+                subscribeToCompanyListUpdatesUseCase
+        )
     }
+
+    @Provides
+    fun provideSubscribeToCompanyListUpdatesUseCase(
+            companyResource: CompanyResource,
+            threadScheduler: ThreadScheduler
+    ): SubscribeToCompanyListUpdatesUseCase {
+        return SubscribeToCompanyListUpdates(
+                companyResource = companyResource,
+                threadScheduler = threadScheduler
+        )
+    }
+
 }
 
 @PerActivity

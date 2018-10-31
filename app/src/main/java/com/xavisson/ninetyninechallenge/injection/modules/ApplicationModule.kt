@@ -6,10 +6,12 @@ import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
 
-@Module
+@Module(includes = arrayOf(
+        ExecutorsModule::class,
+        CompanyModule::class))
 class ApplicationModule(private val application: Application) {
 
-	@Provides
-	@Singleton
-	fun provideApplicationContext(): Context = application
+    @Provides
+    @Singleton
+    fun provideApplicationContext(): Context = application
 }

@@ -6,67 +6,71 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-	def globalConfiguration = project.extensions.getByName("ext")
-	buildToolsVersion globalConfiguration["androidBuildToolsVersion"]
-	compileSdkVersion globalConfiguration["androidCompileSdkVersion"]
+    def globalConfiguration = project.extensions.getByName("ext")
+    buildToolsVersion globalConfiguration["androidBuildToolsVersion"]
+    compileSdkVersion globalConfiguration["androidCompileSdkVersion"]
 
-	defaultConfig {
-		applicationId "com.xavisson.ninetyninechallenge"
-		minSdkVersion globalConfiguration["androidMinSdkVersion"]
-		targetSdkVersion globalConfiguration["androidTargetSdkVersion"]
-		versionCode versionBuild
-		versionName "${versionMajor}.${versionMinor}.${versionPatch}"
-		multiDexEnabled true
-		vectorDrawables.useSupportLibrary = true
-		testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-	}
-	buildTypes {
-		debug {
-			debuggable true
-			minifyEnabled false
-			applicationIdSuffix '.debug'
-			proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-			versionNameSuffix '-SNAPSHOT'
-		}
-		staging {
-			debuggable true
-			minifyEnabled true
-			applicationIdSuffix '.staging'
-			proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-			versionNameSuffix '-STAGING'
-		}
-		release {
-			debuggable false
-			minifyEnabled false
-			proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-		}
-	}
+    defaultConfig {
+        applicationId "com.xavisson.ninetyninechallenge"
+        minSdkVersion globalConfiguration["androidMinSdkVersion"]
+        targetSdkVersion globalConfiguration["androidTargetSdkVersion"]
+        versionCode versionBuild
+        versionName "${versionMajor}.${versionMinor}.${versionPatch}"
+        multiDexEnabled true
+        vectorDrawables.useSupportLibrary = true
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        debug {
+            debuggable true
+            minifyEnabled false
+            applicationIdSuffix '.debug'
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            versionNameSuffix '-SNAPSHOT'
+        }
+        staging {
+            debuggable true
+            minifyEnabled true
+            applicationIdSuffix '.staging'
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            versionNameSuffix '-STAGING'
+        }
+        release {
+            debuggable false
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
 }
 
 kapt {
-	generateStubs = true
+    generateStubs = true
 }
 
 dependencies {
-	api project(':domain')
-	api project(':data')
+    api project(':domain')
+    api project(':data')
 
-	implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-	//Kotlin
-	implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:${kotlinVersion}"
+    //Kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:${kotlinVersion}"
 
-	//Support
-	implementation "com.android.support:appcompat-v7:${appCompatV7Version}"
+    //Support
+    implementation "com.android.support:appcompat-v7:${appCompatV7Version}"
     implementation "com.android.support:recyclerview-v7:${appCompatV7Version}"
     implementation "com.android.support:cardview-v7:${appCompatV7Version}"
 
-	//Dagger
-	kapt "com.google.dagger:dagger-compiler:${daggerVersion}"
-	implementation "com.google.dagger:dagger:${daggerVersion}"
+    //Dagger
+    kapt "com.google.dagger:dagger-compiler:${daggerVersion}"
+    implementation "com.google.dagger:dagger:${daggerVersion}"
 
-	//Testing
-	testImplementation 'junit:junit:4.12'
-	androidTestImplementation 'com.android.support.test:runner:1.0.2'
-	androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    //Rx
+    implementation "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}"
+    implementation "io.reactivex.rxjava2:rxkotlin:${rxKotlinVersion}"
+
+    //Testing
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }

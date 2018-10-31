@@ -3,7 +3,8 @@ apply from: 'dependencies/dependencies.gradle'
 apply plugin: 'kotlin'
 
 dependencies {
-	implementation "org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}"
+    implementation "io.reactivex.rxjava2:rxkotlin:${rxKotlinVersion}"
 }
 
 sourceCompatibility = "1.7"
