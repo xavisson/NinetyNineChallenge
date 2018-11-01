@@ -1,9 +1,7 @@
 package com.xavisson.ninetyninechallenge.presentation.companydetail.injector
 
 import android.support.v7.app.AppCompatActivity
-import com.xavisson.ninetyninechallenge.domain.company.CompanyResource
-import com.xavisson.ninetyninechallenge.domain.company.GetCompanyDetails
-import com.xavisson.ninetyninechallenge.domain.company.GetCompanyDetailsUseCase
+import com.xavisson.ninetyninechallenge.domain.company.*
 import com.xavisson.ninetyninechallenge.domain.executor.ThreadScheduler
 import com.xavisson.ninetyninechallenge.injection.PerActivity
 import com.xavisson.ninetyninechallenge.injection.components.ActivityComponent
@@ -23,10 +21,12 @@ class CompanyDetailModule(private val activity: AppCompatActivity) : ActivityMod
     @Provides
     fun providesCompanyDetailPresenter(
             getCompanyDetailsUseCase: GetCompanyDetailsUseCase,
+            subscribeToSharedPriceUpdatesUseCase: SubscribeToSharedPriceUpdatesUseCase,
             activityNavigator: ActivityNavigator
     ): CompanyDetailPresenter {
         return CompanyDetailPresenter(
                 getCompanyDetailsUseCase = getCompanyDetailsUseCase,
+                subscribeToSharedPriceUpdatesUseCase = subscribeToSharedPriceUpdatesUseCase,
                 activityNavigator = activityNavigator
         )
     }
@@ -37,6 +37,17 @@ class CompanyDetailModule(private val activity: AppCompatActivity) : ActivityMod
             threadScheduler: ThreadScheduler
     ): GetCompanyDetailsUseCase {
         return GetCompanyDetails(
+                companyResource = companyResource,
+                threadScheduler = threadScheduler
+        )
+    }
+
+    @Provides
+    fun provideSubscribeToSharedPriceUpdatesUseCase(
+            companyResource: CompanyResource,
+            threadScheduler: ThreadScheduler
+    ): SubscribeToSharedPriceUpdatesUseCase {
+        return SubscribeToSharedPriceUpdates(
                 companyResource = companyResource,
                 threadScheduler = threadScheduler
         )
