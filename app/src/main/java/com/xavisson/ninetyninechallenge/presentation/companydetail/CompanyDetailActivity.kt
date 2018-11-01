@@ -41,6 +41,10 @@ class CompanyDetailActivity : BaseActivity(), CompanyDetailView {
         sharePrice.text = companyDetails.sharePrice.toString()
     }
 
+    override fun refreshSharedPrice(sharePriceValue: Double) {
+        sharePrice.text = sharePriceValue.toString()
+    }
+
     private fun setupToolbar() {
         toolbar.navigationIcon = ContextCompat.getDrawable(this, R.drawable.ic_back_arrow)
         toolbar.setNavigationOnClickListener { presenter.onBackPressed() }
