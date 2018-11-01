@@ -35,4 +35,8 @@ class CompanyResource(
         return companyApi.searchCompanies()
                 .doOnNext { currentCompanyList = it }
     }
+
+    fun searchCompanyWithId(companyId: Int): Observable<Company> {
+        return Observable.just(currentCompanyList.find { it.id == companyId })
+    }
 }
