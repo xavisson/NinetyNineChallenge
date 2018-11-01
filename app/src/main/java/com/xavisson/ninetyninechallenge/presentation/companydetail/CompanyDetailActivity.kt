@@ -33,6 +33,14 @@ class CompanyDetailActivity : BaseActivity(), CompanyDetailView {
         setupToolbar()
     }
 
+    override fun showCompanyDetails(companyDetails: CompanyDetailUI) {
+        name.text = companyDetails.name
+        ric.text = companyDetails.ric
+        description.text = companyDetails.description
+        country.text = companyDetails.country
+        sharePrice.text = companyDetails.sharePrice.toString()
+    }
+
     private fun setupToolbar() {
         toolbar.navigationIcon = ContextCompat.getDrawable(this, R.drawable.ic_back_arrow)
         toolbar.setNavigationOnClickListener { presenter.onBackPressed() }

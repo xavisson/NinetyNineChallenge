@@ -4,7 +4,7 @@
     <style name="Heading1" parent="android:TextAppearance">
         <item name="android:textSize">28dp</item>
         <item name="android:height">32dp</item>
-        <item name="android:textColor">@color/dark_grey</item>
+        <item name="android:textColor">@color/grey</item>
         <item name="android:textStyle">bold</item>
     </style>
 

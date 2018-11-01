@@ -19,7 +19,7 @@ class CompanyDetailPresenter(
 
     fun getCompanyDetails() {
         getCompanyDetailsUseCase.execute(companyId!!).subscribeBy(
-                onNext = { Logger.d { "xtest: ${it.name}" } }
+                onNext = { getView()?.showCompanyDetails(it.toDetailUi()) }
         )
     }
 
