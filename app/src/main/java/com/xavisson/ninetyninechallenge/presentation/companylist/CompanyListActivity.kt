@@ -1,7 +1,5 @@
 package com.xavisson.ninetyninechallenge.presentation.companylist
 
-import android.os.Bundle
-import android.os.Handler
 import android.support.v7.widget.LinearLayoutManager
 import com.xavisson.ninetyninechallenge.NinetyNineChallengeApplication
 import com.xavisson.ninetyninechallenge.R
@@ -38,6 +36,7 @@ class CompanyListActivity : BaseActivity(), CompanyListView {
     private fun setupRecyclerView() {
         companyList.layoutManager = LinearLayoutManager(this)
         companyList.adapter = adapter
+        adapter.onItemClick = { company -> presenter.onCompanyPressed(company) }
     }
 
     override fun showCompanyData(companies: List<CompanyUI>) {

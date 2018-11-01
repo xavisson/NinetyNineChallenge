@@ -11,6 +11,8 @@ import kotlin.properties.Delegates
 
 class CompanyAdapter : RecyclerView.Adapter<CompanyAdapter.ViewHolder>(), AutoUpdatableAdapter {
 
+    var onItemClick: ((CompanyUI) -> Unit)? = null
+
     var items: List<CompanyUI> by Delegates.observable(emptyList())
     { prop, oldList, newList ->
         autoNotify(oldList, newList) { oldItem, newItem -> oldItem.id == newItem.id }
@@ -26,7 +28,14 @@ class CompanyAdapter : RecyclerView.Adapter<CompanyAdapter.ViewHolder>(), AutoUp
         holder.bind(items[position])
     }
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+        init {
+            itemView.setOnClickListener {
+                onItemClick?.invoke(items[adapterPosition])
+            }
+        }
+
         fun bind(company: CompanyUI) = with(itemView) {
             companyName.text = company.name
             sharePrice.text = company.sharePrice.toString()

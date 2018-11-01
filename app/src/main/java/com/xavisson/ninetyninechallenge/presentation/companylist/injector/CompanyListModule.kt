@@ -1,6 +1,6 @@
 package com.xavisson.ninetyninechallenge.presentation.companylist.injector
 
-import android.app.Activity
+import android.support.v7.app.AppCompatActivity
 import com.xavisson.ninetyninechallenge.domain.company.CompanyResource
 import com.xavisson.ninetyninechallenge.domain.company.SubscribeToCompanyListUpdates
 import com.xavisson.ninetyninechallenge.domain.company.SubscribeToCompanyListUpdatesUseCase
@@ -11,19 +11,23 @@ import com.xavisson.ninetyninechallenge.injection.components.ApplicationComponen
 import com.xavisson.ninetyninechallenge.injection.modules.ActivityModule
 import com.xavisson.ninetyninechallenge.presentation.companylist.CompanyListActivity
 import com.xavisson.ninetyninechallenge.presentation.companylist.CompanyListPresenter
+import com.xavisson.ninetyninechallenge.presentation.navigator.ActivityNavigator
+import com.xavisson.ninetyninechallenge.presentation.navigator.ApplicationActivityNavigator
 import dagger.Component
 import dagger.Module
 import dagger.Provides
 
 @Module
-class CompanyListModule(activity: Activity) : ActivityModule {
+class CompanyListModule(private val activity: AppCompatActivity) : ActivityModule {
 
     @Provides
     fun provideCompanyListPresenter(
-            subscribeToCompanyListUpdatesUseCase: SubscribeToCompanyListUpdatesUseCase
+            subscribeToCompanyListUpdatesUseCase: SubscribeToCompanyListUpdatesUseCase,
+            activityNavigator: ActivityNavigator
     ): CompanyListPresenter {
         return CompanyListPresenter(
-                subscribeToCompanyListUpdatesUseCase
+                subscribeToCompanyListUpdatesUseCase = subscribeToCompanyListUpdatesUseCase,
+                activityNavigator = activityNavigator
         )
     }
 
@@ -37,6 +41,11 @@ class CompanyListModule(activity: Activity) : ActivityModule {
                 threadScheduler = threadScheduler
         )
     }
+
+    @Provides
+    fun provideActivityNavigator(): ActivityNavigator = ApplicationActivityNavigator(
+            activity
+    )
 
 }
 
