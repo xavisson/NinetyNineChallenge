@@ -1,5 +1,6 @@
 package com.xavisson.ninetyninechallenge.presentation.companydetail
 
+import android.support.v4.content.ContextCompat
 import com.xavisson.ninetyninechallenge.NinetyNineChallengeApplication
 import com.xavisson.ninetyninechallenge.R
 import com.xavisson.ninetyninechallenge.base.BaseActivity
@@ -8,6 +9,7 @@ import com.xavisson.ninetyninechallenge.presentation.companydetail.CompanyDetail
 import com.xavisson.ninetyninechallenge.presentation.companydetail.injector.CompanyDetailModule
 import com.xavisson.ninetyninechallenge.presentation.companydetail.injector.DaggerCompanyDetailComponent
 import com.xavisson.ninetyninechallenge.presentation.navigator.IntentExtras
+import kotlinx.android.synthetic.main.companydetail_layout.*
 import javax.inject.Inject
 
 class CompanyDetailActivity : BaseActivity(), CompanyDetailView {
@@ -28,5 +30,11 @@ class CompanyDetailActivity : BaseActivity(), CompanyDetailView {
 
     override fun setupViews() {
         presenter.companyId = intent.getIntExtra(IntentExtras.COMPANY_ID, COMPANY_ID_LOST)
+        setupToolbar()
+    }
+
+    private fun setupToolbar() {
+        toolbar.navigationIcon = ContextCompat.getDrawable(this, R.drawable.ic_back_arrow)
+        toolbar.setNavigationOnClickListener { presenter.onBackPressed() }
     }
 }

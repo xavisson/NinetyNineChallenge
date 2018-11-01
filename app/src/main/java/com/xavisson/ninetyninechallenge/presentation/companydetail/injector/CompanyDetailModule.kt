@@ -11,6 +11,8 @@ import com.xavisson.ninetyninechallenge.injection.components.ApplicationComponen
 import com.xavisson.ninetyninechallenge.injection.modules.ActivityModule
 import com.xavisson.ninetyninechallenge.presentation.companydetail.CompanyDetailActivity
 import com.xavisson.ninetyninechallenge.presentation.companydetail.CompanyDetailPresenter
+import com.xavisson.ninetyninechallenge.presentation.navigator.ActivityNavigator
+import com.xavisson.ninetyninechallenge.presentation.navigator.ApplicationActivityNavigator
 import dagger.Component
 import dagger.Module
 import dagger.Provides
@@ -20,10 +22,12 @@ class CompanyDetailModule(private val activity: AppCompatActivity) : ActivityMod
 
     @Provides
     fun providesCompanyDetailPresenter(
-            getCompanyDetailsUseCase: GetCompanyDetailsUseCase
+            getCompanyDetailsUseCase: GetCompanyDetailsUseCase,
+            activityNavigator: ActivityNavigator
     ): CompanyDetailPresenter {
         return CompanyDetailPresenter(
-                getCompanyDetailsUseCase = getCompanyDetailsUseCase
+                getCompanyDetailsUseCase = getCompanyDetailsUseCase,
+                activityNavigator = activityNavigator
         )
     }
 
@@ -37,6 +41,11 @@ class CompanyDetailModule(private val activity: AppCompatActivity) : ActivityMod
                 threadScheduler = threadScheduler
         )
     }
+
+    @Provides
+    fun provideActivityNavigator(): ActivityNavigator = ApplicationActivityNavigator(
+            activity
+    )
 }
 
 @PerActivity
