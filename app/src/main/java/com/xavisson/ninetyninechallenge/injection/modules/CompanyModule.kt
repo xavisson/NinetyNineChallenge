@@ -1,12 +1,13 @@
 package com.xavisson.ninetyninechallenge.injection.modules
 
+import com.xavisson.ninetyninechallenge.domain.company.CompanyApi
 import com.xavisson.ninetyninechallenge.domain.company.CompanyListStream
 import com.xavisson.ninetyninechallenge.domain.company.CompanyResource
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
 
-@Module
+@Module(includes = arrayOf(NinetyNineModule::class))
 open class CompanyModule {
 
     companion object {
@@ -22,10 +23,12 @@ open class CompanyModule {
     @Provides
     @Singleton
     fun provideCompanyResource(
-            modelStream: CompanyListStream
+            modelStream: CompanyListStream,
+            companyApi: CompanyApi
     ): CompanyResource {
         return CompanyResource(
-                modelStream = modelStream
+                modelStream = modelStream,
+                companyApi = companyApi
         )
     }
 }
