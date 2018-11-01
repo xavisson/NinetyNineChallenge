@@ -16,22 +16,12 @@ class CompanyResource(
 
     var currentCompanyList: List<Company> = emptyList()
 
-    private val items = (1..10).map { Company(
-            id = it,
-            name = "company name $it",
-            ric = "ric $it/",
-            sharePrice = it.toDouble()) }
-
-    init {
-        generate()
-    }
-
-    fun generate(): List<Company> {
-        val rand = Random(System.currentTimeMillis())
-        return items.filter { rand.nextBoolean() }
-    }
-
     fun searchCompanies(): Observable<List<Company>> {
         return companyApi.searchCompanies()
+                .doOnNext { currentCompanyList = it }
+    }
+
+    fun searchCompanyWithId(companyId: Int): Observable<Company> {
+        return companyApi.searchCompanyById(companyId)
     }
 }

@@ -18,6 +18,8 @@ fun CompanyApiModel.toDomain(): Company {
             id = id,
             name = name,
             ric = ric,
-            sharePrice = sharePrice
+            sharePrice = sharePrice,
+            description = description,
+            country = country
     )
 }

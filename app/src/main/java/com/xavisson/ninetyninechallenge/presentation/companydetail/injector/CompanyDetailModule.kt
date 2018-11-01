@@ -1,16 +1,16 @@
-package com.xavisson.ninetyninechallenge.presentation.companylist.injector
+package com.xavisson.ninetyninechallenge.presentation.companydetail.injector
 
 import android.support.v7.app.AppCompatActivity
 import com.xavisson.ninetyninechallenge.domain.company.CompanyResource
-import com.xavisson.ninetyninechallenge.domain.company.SubscribeToCompanyListUpdates
-import com.xavisson.ninetyninechallenge.domain.company.SubscribeToCompanyListUpdatesUseCase
+import com.xavisson.ninetyninechallenge.domain.company.GetCompanyDetails
+import com.xavisson.ninetyninechallenge.domain.company.GetCompanyDetailsUseCase
 import com.xavisson.ninetyninechallenge.domain.executor.ThreadScheduler
 import com.xavisson.ninetyninechallenge.injection.PerActivity
 import com.xavisson.ninetyninechallenge.injection.components.ActivityComponent
 import com.xavisson.ninetyninechallenge.injection.components.ApplicationComponent
 import com.xavisson.ninetyninechallenge.injection.modules.ActivityModule
-import com.xavisson.ninetyninechallenge.presentation.companylist.CompanyListActivity
-import com.xavisson.ninetyninechallenge.presentation.companylist.CompanyListPresenter
+import com.xavisson.ninetyninechallenge.presentation.companydetail.CompanyDetailActivity
+import com.xavisson.ninetyninechallenge.presentation.companydetail.CompanyDetailPresenter
 import com.xavisson.ninetyninechallenge.presentation.navigator.ActivityNavigator
 import com.xavisson.ninetyninechallenge.presentation.navigator.ApplicationActivityNavigator
 import dagger.Component
@@ -18,25 +18,25 @@ import dagger.Module
 import dagger.Provides
 
 @Module
-class CompanyListModule(private val activity: AppCompatActivity) : ActivityModule {
+class CompanyDetailModule(private val activity: AppCompatActivity) : ActivityModule {
 
     @Provides
-    fun provideCompanyListPresenter(
-            subscribeToCompanyListUpdatesUseCase: SubscribeToCompanyListUpdatesUseCase,
+    fun providesCompanyDetailPresenter(
+            getCompanyDetailsUseCase: GetCompanyDetailsUseCase,
             activityNavigator: ActivityNavigator
-    ): CompanyListPresenter {
-        return CompanyListPresenter(
-                subscribeToCompanyListUpdatesUseCase = subscribeToCompanyListUpdatesUseCase,
+    ): CompanyDetailPresenter {
+        return CompanyDetailPresenter(
+                getCompanyDetailsUseCase = getCompanyDetailsUseCase,
                 activityNavigator = activityNavigator
         )
     }
 
     @Provides
-    fun provideSubscribeToCompanyListUpdatesUseCase(
+    fun provideGetCompanyDetailsUseCase(
             companyResource: CompanyResource,
             threadScheduler: ThreadScheduler
-    ): SubscribeToCompanyListUpdatesUseCase {
-        return SubscribeToCompanyListUpdates(
+    ): GetCompanyDetailsUseCase {
+        return GetCompanyDetails(
                 companyResource = companyResource,
                 threadScheduler = threadScheduler
         )
@@ -46,14 +46,13 @@ class CompanyListModule(private val activity: AppCompatActivity) : ActivityModul
     fun provideActivityNavigator(): ActivityNavigator = ApplicationActivityNavigator(
             activity
     )
-
 }
 
 @PerActivity
 @Component(
         dependencies = arrayOf(ApplicationComponent::class),
-        modules = arrayOf(CompanyListModule::class)
+        modules = arrayOf(CompanyDetailModule::class)
 )
-interface CompanyListComponent : ActivityComponent {
-    fun inject(activity: CompanyListActivity)
+interface CompanyDetailComponent : ActivityComponent {
+    fun inject(activity: CompanyDetailActivity)
 }
