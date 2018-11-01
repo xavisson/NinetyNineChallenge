@@ -33,5 +33,6 @@ class CompanyResource(
 
     fun searchCompanies(): Observable<List<Company>> {
         return companyApi.searchCompanies()
+                .doOnNext { currentCompanyList = it }
     }
 }
