@@ -41,7 +41,7 @@ class CompanyDetailActivity : BaseActivity(), CompanyDetailView {
         sharePrice.text = companyDetails.sharePrice.toString()
     }
 
-    override fun refreshSharedPrice(sharePriceValue: Double) {
+    override fun refreshSharePrice(sharePriceValue: Double) {
         sharePrice.text = sharePriceValue.toString()
     }
 

@@ -2,15 +2,14 @@ package com.xavisson.ninetyninechallenge.presentation.companydetail
 
 import com.xavisson.ninetyninechallenge.base.BasePresenter
 import com.xavisson.ninetyninechallenge.domain.company.GetCompanyDetailsUseCase
-import com.xavisson.ninetyninechallenge.domain.company.SubscribeToSharedPriceUpdatesUseCase
-import com.xavisson.ninetyninechallenge.domain.logger.Logger
+import com.xavisson.ninetyninechallenge.domain.company.SubscribeToSharePriceUpdatesUseCase
 import com.xavisson.ninetyninechallenge.domain.reactive.addDisposableTo
 import com.xavisson.ninetyninechallenge.presentation.navigator.ActivityNavigator
 import io.reactivex.rxkotlin.subscribeBy
 
 class CompanyDetailPresenter(
         private val getCompanyDetailsUseCase: GetCompanyDetailsUseCase,
-        private val subscribeToSharedPriceUpdatesUseCase: SubscribeToSharedPriceUpdatesUseCase,
+        private val subscribeToSharePriceUpdatesUseCase: SubscribeToSharePriceUpdatesUseCase,
         private val activityNavigator: ActivityNavigator
 ) : BasePresenter<CompanyDetailView>() {
 
@@ -19,7 +18,7 @@ class CompanyDetailPresenter(
             field = value
             field?.let {
                 getCompanyDetails()
-                subscribeToSharedPriceUpdates()
+                subscribeToSharePriceUpdates()
             }
         }
 
@@ -30,10 +29,10 @@ class CompanyDetailPresenter(
                 ).addDisposableTo(disposeBag)
     }
 
-    private fun subscribeToSharedPriceUpdates() {
-        subscribeToSharedPriceUpdatesUseCase.execute(companyId!!)
+    private fun subscribeToSharePriceUpdates() {
+        subscribeToSharePriceUpdatesUseCase.execute(companyId!!)
                 .subscribeBy(
-                        onNext = { getView()?.refreshSharedPrice(it)
+                        onNext = { getView()?.refreshSharePrice(it)
                         }
                 ).addDisposableTo(disposeBag)
     }

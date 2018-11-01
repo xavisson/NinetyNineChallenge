@@ -5,14 +5,14 @@ import com.xavisson.ninetyninechallenge.domain.executor.applyScheduler
 import io.reactivex.Observable
 
 
-interface SubscribeToSharedPriceUpdatesUseCase {
+interface SubscribeToSharePriceUpdatesUseCase {
     fun execute(companyId: Int): Observable<Double>
 }
 
-class SubscribeToSharedPriceUpdates(
+class SubscribeToSharePriceUpdates(
         private val companyResource: CompanyResource,
         private val threadScheduler: ThreadScheduler
-) : SubscribeToSharedPriceUpdatesUseCase {
+) : SubscribeToSharePriceUpdatesUseCase {
     override fun execute(companyId: Int): Observable<Double> {
         return companyResource.stream.getObservable()
                 .applyScheduler(threadScheduler)

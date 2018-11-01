@@ -21,12 +21,12 @@ class CompanyDetailModule(private val activity: AppCompatActivity) : ActivityMod
     @Provides
     fun providesCompanyDetailPresenter(
             getCompanyDetailsUseCase: GetCompanyDetailsUseCase,
-            subscribeToSharedPriceUpdatesUseCase: SubscribeToSharedPriceUpdatesUseCase,
+            subscribeToSharePriceUpdatesUseCase: SubscribeToSharePriceUpdatesUseCase,
             activityNavigator: ActivityNavigator
     ): CompanyDetailPresenter {
         return CompanyDetailPresenter(
                 getCompanyDetailsUseCase = getCompanyDetailsUseCase,
-                subscribeToSharedPriceUpdatesUseCase = subscribeToSharedPriceUpdatesUseCase,
+                subscribeToSharePriceUpdatesUseCase = subscribeToSharePriceUpdatesUseCase,
                 activityNavigator = activityNavigator
         )
     }
@@ -43,11 +43,11 @@ class CompanyDetailModule(private val activity: AppCompatActivity) : ActivityMod
     }
 
     @Provides
-    fun provideSubscribeToSharedPriceUpdatesUseCase(
+    fun provideSubscribeToSharePriceUpdatesUseCase(
             companyResource: CompanyResource,
             threadScheduler: ThreadScheduler
-    ): SubscribeToSharedPriceUpdatesUseCase {
-        return SubscribeToSharedPriceUpdates(
+    ): SubscribeToSharePriceUpdatesUseCase {
+        return SubscribeToSharePriceUpdates(
                 companyResource = companyResource,
                 threadScheduler = threadScheduler
         )
