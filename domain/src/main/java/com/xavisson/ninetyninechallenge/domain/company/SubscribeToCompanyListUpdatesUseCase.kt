@@ -14,9 +14,7 @@ class SubscribeToCompanyListUpdates(
         private val threadScheduler: ThreadScheduler
 ) : SubscribeToCompanyListUpdatesUseCase {
     override fun execute(): Observable<List<Company>> {
-//        return companyResource.stream.getObservable()
-//                .applyScheduler(threadScheduler)
-        return companyResource.searchCompanies()
+        return companyResource.stream.getObservable()
                 .applyScheduler(threadScheduler)
     }
 }
