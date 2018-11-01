@@ -5,6 +5,7 @@ import com.xavisson.ninetyninechallenge.domain.company.Company
 
 interface CompanyDetailView : BaseView {
     fun showCompanyDetails(companyDetails: CompanyDetailUI)
+    fun refreshSharePrice(sharePrice: Double)
 }
 
 data class CompanyDetailUI(
