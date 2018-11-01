@@ -10,10 +10,6 @@ import javax.inject.Singleton
 @Module(includes = arrayOf(NinetyNineModule::class))
 open class CompanyModule {
 
-    companion object {
-        private val REPO_VERSION: Int = 1
-    }
-
     @Provides
     @Singleton
     fun providesServiceListStream(): CompanyListStream {

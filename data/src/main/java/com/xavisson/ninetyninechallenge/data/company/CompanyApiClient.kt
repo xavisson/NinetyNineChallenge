@@ -12,11 +12,11 @@ class CompanyApiClient : CompanyApi {
         val companyApiClient = ApiClientBuilder(NinetyNineApiClient(emptySet()))
                 .buildEndpoint(CompanyApiDefinition::class)
 
-        return companyApiClient.getCompanies().map { it.toDomain() }
+        return companyApiClient.getCompanies().map { it.map { it.toDomain() } }
     }
 }
 
 interface CompanyApiDefinition {
     @GET("/testapi/1/companies")
-    fun getCompanies(): Observable<SearchCompaniesApiModel>
+    fun getCompanies(): Observable<List<CompanyApiModel>>
 }

@@ -3,9 +3,6 @@ package com.xavisson.ninetyninechallenge.data.company
 import com.google.gson.annotations.SerializedName
 import com.xavisson.ninetyninechallenge.domain.company.Company
 
-data class SearchCompaniesApiModel(
-        val results: List<CompanyApiModel>
-)
 
 data class CompanyApiModel(
         @SerializedName("id") val id: Int,
@@ -15,10 +12,6 @@ data class CompanyApiModel(
         @SerializedName("description") val description: String?,
         @SerializedName("country") val country: String?
 )
-
-fun SearchCompaniesApiModel.toDomain(): List<Company> {
-    return results.map { it.toDomain() }
-}
 
 fun CompanyApiModel.toDomain(): Company {
     return Company(
