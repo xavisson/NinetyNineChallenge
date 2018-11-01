@@ -16,6 +16,7 @@ class SubscribeToCompanyListUpdates(
     override fun execute(): Observable<List<Company>> {
 //        return companyResource.stream.getObservable()
 //                .applyScheduler(threadScheduler)
-        return Observable.just(companyResource.generate())
+        return companyResource.searchCompanies()
+                .applyScheduler(threadScheduler)
     }
 }
