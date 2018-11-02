@@ -4,4 +4,8 @@ ext {
     androidMinSdkVersion = 19
     androidTargetSdkVersion = 28
     androidCompileSdkVersion = 28
+
+    //Test
+    kluentVersion = '1.20'
+    junitVersion = '4.12'
 }
