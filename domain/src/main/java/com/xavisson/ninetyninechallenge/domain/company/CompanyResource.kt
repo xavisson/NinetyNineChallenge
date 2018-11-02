@@ -1,7 +1,6 @@
 package com.xavisson.ninetyninechallenge.domain.company
 
 import com.xavisson.ninetyninechallenge.domain.executor.ThreadExecutor
-import com.xavisson.ninetyninechallenge.domain.logger.Logger
 import com.xavisson.ninetyninechallenge.domain.reactive.DisposeBag
 import com.xavisson.ninetyninechallenge.domain.reactive.Stream
 import com.xavisson.ninetyninechallenge.domain.reactive.addDisposableTo
@@ -35,14 +34,13 @@ class CompanyResource(
         subscribe()
     }
 
-    private fun subscribe() {
-        currentCompanyList = emptyList()
+    fun subscribe() {
         companiesSubscriptionDisposeBag.dispose()
         val companyUpdatesFromPolling = pollingCompanies()
         companyUpdatesFromPolling
                 .subscribeOn(Schedulers.from(threadExecutor))
                 .onErrorResumeNext { throwable: Throwable ->
-                    Logger.e { "Error at subscribe: $throwable" }
+                    currentCompanyList = emptyList()
                     Observable.just(currentCompanyList)
                 }
                 .subscribeToPolling()
