@@ -38,7 +38,9 @@ abstract class BasePresenter<T : BaseView> {
         }
     }
 
-    open fun onDestroy() {}
+    open fun onDestroy() {
+        clearDisposeBag()
+    }
 
     open fun viewWillAppear() {
         Logger.d {
