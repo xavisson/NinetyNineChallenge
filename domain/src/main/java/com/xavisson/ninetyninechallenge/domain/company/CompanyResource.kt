@@ -54,7 +54,7 @@ class CompanyResource(
                 }
     }
 
-    private fun fetchCompanies(): Observable<List<Company>> {
+    fun fetchCompanies(): Observable<List<Company>> {
         return companyApi.searchCompanies()
                 .map { it.sortedBy { it.sharePrice } }
                 .doOnNext { currentCompanyList = it }
