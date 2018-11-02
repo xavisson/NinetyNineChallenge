@@ -1,4 +1,6 @@
 <resources>
 	<string name="app_name">Ninety Nine Challenge</string>
     <string name="companylist_header">Portfolio</string>
+    <string name="error_empty_list">There has been a problem and we could not retrieve the list of companies, please check your Internet connectivity.</string>
+    <string name="refresh">Try again</string>
 </resources>

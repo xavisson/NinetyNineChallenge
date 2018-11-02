@@ -5,6 +5,7 @@ import com.xavisson.ninetyninechallenge.domain.company.Company
 
 interface CompanyListView : BaseView {
     fun showCompanyData(companies: List<CompanyUI>)
+    fun showErrorMessage()
 }
 
 data class CompanyUI(

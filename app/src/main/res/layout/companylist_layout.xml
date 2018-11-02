@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/dark_blue"
@@ -12,11 +13,35 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:text="@string/companylist_header"
-        android:textAppearance="@style/Heading1_inverted"/>
+        android:textAppearance="@style/Heading1_inverted" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/companyList"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp" />
+
+    <RelativeLayout
+        android:id="@+id/errorMessageLayout"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="16dp"/>
+        android:paddingEnd="16dp"
+        android:paddingStart="16dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginBottom="16dp"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/error_empty_list"
+            android:textAppearance="@style/Body2_inverted" />
+
+        <Button
+            android:id="@+id/refreshButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="@string/refresh"/>
+    </RelativeLayout>
 </LinearLayout>

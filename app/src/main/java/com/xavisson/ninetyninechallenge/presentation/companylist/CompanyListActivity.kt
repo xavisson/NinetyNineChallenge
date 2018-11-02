@@ -4,10 +4,13 @@ import android.support.v7.widget.LinearLayoutManager
 import com.xavisson.ninetyninechallenge.NinetyNineChallengeApplication
 import com.xavisson.ninetyninechallenge.R
 import com.xavisson.ninetyninechallenge.base.BaseActivity
+import com.xavisson.ninetyninechallenge.domain.logger.Logger
 import com.xavisson.ninetyninechallenge.lifecycle.Presenter
 import com.xavisson.ninetyninechallenge.presentation.companylist.adapter.CompanyAdapter
 import com.xavisson.ninetyninechallenge.presentation.companylist.injector.CompanyListModule
 import com.xavisson.ninetyninechallenge.presentation.companylist.injector.DaggerCompanyListComponent
+import com.xavisson.ninetyninechallenge.utils.gone
+import com.xavisson.ninetyninechallenge.utils.visible
 import kotlinx.android.synthetic.main.companylist_layout.*
 import javax.inject.Inject
 
@@ -31,6 +34,7 @@ class CompanyListActivity : BaseActivity(), CompanyListView {
 
     override fun setupViews() {
         setupRecyclerView()
+        refreshButton.setOnClickListener { presenter.getCompanies() }
     }
 
     private fun setupRecyclerView() {
@@ -40,6 +44,13 @@ class CompanyListActivity : BaseActivity(), CompanyListView {
     }
 
     override fun showCompanyData(companies: List<CompanyUI>) {
+        errorMessageLayout.gone()
+        companyList.visible()
         adapter.items = companies
+    }
+
+    override fun showErrorMessage() {
+        errorMessageLayout.visible()
+        companyList.gone()
     }
 }
