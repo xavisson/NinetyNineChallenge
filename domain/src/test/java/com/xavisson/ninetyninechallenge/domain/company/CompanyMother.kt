@@ -47,14 +47,14 @@ class CompanyMother {
         )
     }
 
-    fun givenGivenListOfCompanies(): List<Company> {
+    fun givenListOfCompanies(): List<Company> {
         return listOf(
                 givenAnyCompany(),
                 givenAnyCompany()
         )
     }
 
-    fun givenGivenUnorderedListOfCompanies(): List<Company> {
+    fun givenUnorderedListOfCompanies(): List<Company> {
         return listOf(
                 givenACompanyWithSharePrice(sharedPrice = 7642.0),
                 givenACompanyWithSharePrice(sharedPrice = 9564.0),
