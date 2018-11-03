@@ -38,7 +38,7 @@ class CompanyResourceTest {
                 modelStream = modelStream,
                 threadExecutor = threadExecutorForTest,
                 companyApi = companyApi
-                )
+        )
     }
 
     @Test

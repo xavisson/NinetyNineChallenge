@@ -5,6 +5,7 @@ import com.xavisson.ninetyninechallenge.domain.company.GetCompanyDetailsUseCase
 import com.xavisson.ninetyninechallenge.domain.company.SubscribeToSharePriceUpdatesUseCase
 import com.xavisson.ninetyninechallenge.domain.reactive.addDisposableTo
 import com.xavisson.ninetyninechallenge.presentation.navigator.ActivityNavigator
+import com.xavisson.ninetyninechallenge.utils.formatPrice
 import io.reactivex.rxkotlin.subscribeBy
 
 class CompanyDetailPresenter(
@@ -32,7 +33,7 @@ class CompanyDetailPresenter(
     private fun subscribeToSharePriceUpdates() {
         subscribeToSharePriceUpdatesUseCase.execute(companyId!!)
                 .subscribeBy(
-                        onNext = { getView()?.refreshSharePrice(it)
+                        onNext = { getView()?.refreshSharePrice(it.formatPrice())
                         }
                 ).addDisposableTo(disposeBag)
     }
