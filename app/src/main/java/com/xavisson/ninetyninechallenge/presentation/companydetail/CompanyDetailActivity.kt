@@ -38,11 +38,11 @@ class CompanyDetailActivity : BaseActivity(), CompanyDetailView {
         ric.text = companyDetails.ric
         description.text = companyDetails.description
         country.text = companyDetails.country
-        sharePrice.text = companyDetails.sharePrice.toString()
+        sharePrice.text = companyDetails.sharePrice
     }
 
-    override fun refreshSharePrice(sharePriceValue: Double) {
-        sharePrice.text = sharePriceValue.toString()
+    override fun refreshSharePrice(sharePriceValue: String) {
+        sharePrice.text = sharePriceValue
     }
 
     private fun setupToolbar() {

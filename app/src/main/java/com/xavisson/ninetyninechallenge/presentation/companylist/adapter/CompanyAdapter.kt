@@ -38,7 +38,7 @@ class CompanyAdapter : RecyclerView.Adapter<CompanyAdapter.ViewHolder>(), AutoUp
 
         fun bind(company: CompanyUI) = with(itemView) {
             companyName.text = company.name
-            sharePrice.text = company.sharePrice.toString()
+            sharePrice.text = company.sharePrice
             ric.text = company.ric
         }
     }
