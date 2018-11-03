@@ -1,5 +1,7 @@
 package com.xavisson.ninetyninechallenge.domain.company
 
+import com.nhaarman.mockito_kotlin.times
+import com.nhaarman.mockito_kotlin.verify
 import com.nhaarman.mockito_kotlin.whenever
 import com.xavisson.ninetyninechallenge.domain.company.CompanyResource.Companion.POLLING_INTERVAL_IN_SECONDS
 import com.xavisson.ninetyninechallenge.domain.executor.ThreadExecutor
@@ -41,7 +43,7 @@ class CompanyResourceTest {
 
     @Test
     fun shouldOutputListHaveShameSizeAsInputList() {
-        val anyCompanyList: List<Company> = companyMother.givenGivenListOfCompanies()
+        val anyCompanyList: List<Company> = companyMother.givenListOfCompanies()
         whenever(companyApi.searchCompanies()).thenReturn(Observable.just(anyCompanyList))
 
         waitUntilRequestIsProcessed()
@@ -54,7 +56,7 @@ class CompanyResourceTest {
 
     @Test
     fun shouldOrderListBasedOnSharePrice() {
-        val unorderedCompanyList: List<Company> = companyMother.givenGivenUnorderedListOfCompanies()
+        val unorderedCompanyList: List<Company> = companyMother.givenUnorderedListOfCompanies()
         whenever(companyApi.searchCompanies()).thenReturn(Observable.just(unorderedCompanyList))
 
         waitUntilRequestIsProcessed()
@@ -62,9 +64,19 @@ class CompanyResourceTest {
         val subscription = modelStream.getObservable().test()
         val list = subscription.values().last()
 
-        list[0].sharePrice `should be less than`  list[1].sharePrice
+        list[0].sharePrice `should be less than` list[1].sharePrice
     }
 
+    @Test
+    fun shouldPollAtGivenPace() {
+        val companyList = companyMother.givenListOfCompanies()
+        whenever(companyApi.searchCompanies()).thenReturn(Observable.just(companyList))
+
+        waitUntilRequestIsProcessed()
+        waitUntilRequestIsProcessed()
+
+        verify(companyApi, times(3)).searchCompanies()
+    }
 
     fun waitUntilRequestIsProcessed() {
         testSchedulerRule.getTestScheduler().advanceTimeBy(POLLING_INTERVAL_IN_SECONDS, TimeUnit.SECONDS)
