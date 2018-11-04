@@ -5,6 +5,10 @@ As each company share price changes almost in real time, this price is refreshed
 The app has been developed using Kotlin in a Clean way, along with tools such as RxJava, Dagger2 and Retrofit2.
 
 
+# Architecture
+A diagram of the chosen architecture is shown below. It consists in an approach of Clean Architecture in which the business logic of the app is placed in the Resource. This piece creates a recurrent query to get a list of companies and publishes the results in a stream of data that is listened by the use cases.
+![](/screenshots/architecture.svg)
+
 # Considerations
 
 ###### CompanyResource and stream of data
