@@ -3,6 +3,7 @@ package com.xavisson.ninetyninechallenge.presentation.companylist
 import com.xavisson.ninetyninechallenge.base.BasePresenter
 import com.xavisson.ninetyninechallenge.domain.company.SubscribeToCompanyListUpdatesUseCase
 import com.xavisson.ninetyninechallenge.domain.logger.Logger
+import com.xavisson.ninetyninechallenge.domain.reactive.addDisposableTo
 import com.xavisson.ninetyninechallenge.presentation.navigator.ActivityNavigator
 import io.reactivex.rxkotlin.subscribeBy
 
@@ -21,7 +22,7 @@ class CompanyListPresenter(
                                 getView()?.showCompanyData(it.toUi())
                             }
                         }
-                )
+                ).addDisposableTo(disposeBag)
     }
 
     override fun onPause() {
